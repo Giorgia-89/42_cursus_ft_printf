@@ -6,7 +6,7 @@
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:21:56 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/17 18:23:58 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:15:02 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void	print(char *placeholder, ...)
 		if (placeholder[i] == 'd')
 		//set parameter as int
 		{
+			//va_arg updates the args list so that the next call
+			// fetches the next argument
 			int x = va_arg(args, int);
 			printf("%d\n", x);
 		}
 		else if (placeholder[i] == 'f')
+		//double and floats can both be handled by doubles
 		{
 			double x = va_arg(args, double);
 			printf("%f\n", x);
