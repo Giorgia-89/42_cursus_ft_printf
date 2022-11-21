@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   example2.c                                         :+:      :+:    :+:   */
+/*   formats_example.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:46:24 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/18 15:04:08 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:47:45 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ int main ()
 	printf("char is %c\n", c);
 	//converts the int arg to an unsigned char
 	printf("Char: %c\n", 90);
-	//print a string
-	printf("String is %s\n", str);
-	//prints the void *pointer argument in hexadecimal format
-	printf("Hexadecimal ptr is %p\n", p);
 	//prints a decimal number (base 10)
 	printf("Numbers: %d, %d\n", 90, j);
 	//prints an integer in base 10
 	printf("%%i:Numbers: %i, %i\n", 60, j);
+	//print a string
+	printf("String is %s\n", str);
 	//prints an unsigned decimal in base 10 - input cannot be negative
 	printf("%%u: Numbers: %u, %u\n", 60, j);
 	//print a number in hexadecimal (base 16) lowercase
@@ -39,12 +37,9 @@ int main ()
 	//print a number in hexadecimal (base 16) lowercase
 	printf("%d Hexadecimal: %X\n", 255, 255);
 	//print a % sign
-	printf("%%\n");	
-
-	//the following converts an int argument to decimal
-	printf("%.2d Decimal: %.2u\n", 255, 255);
-	
-
+	printf("%%\n");
+	//prints the void *pointer argument in hexadecimal format
+	printf("Hexadecimal ptr is %p %p\n", p, &j);	
 
 	return(0);
 }
