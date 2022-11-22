@@ -1,3 +1,3 @@
 NOTES:
--what i wrote so far is correct in principle, BUT the type of the 
-second argument passed to va_arg() must be int; 
+-functions that were the same in libft.h (e.g., strlen) should be linked to the libft.a file.
+for now i put it in the main printf, but see what other people did

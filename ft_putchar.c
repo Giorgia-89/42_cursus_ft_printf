@@ -6,14 +6,13 @@
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:04:39 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/18 15:47:25 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:03:39 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libftprintf.h"
 
-int	ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-	return (1);
 }

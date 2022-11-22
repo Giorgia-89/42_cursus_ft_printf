@@ -18,7 +18,6 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-//needs to be edited to return length of what was written
 void	ft_putnbr(int n)
 {
 	unsigned int	nbr;
@@ -49,28 +48,47 @@ void	ft_putstr(char *s)
 	}
 }
 
-char	*ft_putlowerhex(int n)
+int		ft_hex_len(unsigned int n)
 {
-	long int	num;
-	long int	quotient;
-	int 		i;
-	char		hexa[100];
+	int	len;
 
-	if (n < 0)
-		return(0);
-	quotient = n;
-	while (quotient != 0)
+	len = 0;
+	while (n != 0)
 	{
-		num = (quotient % 16);
-		if (num < 10)
-			num = num + 80;//check if this needs to be increased by 32
-		else
-			num = num + 87;
-		hexa[i++] = num;
-		quotient = quotient / 16;
+		len++;
+		n = n / 16;
 	}
-	ft_putstr(hexa);
-	return(0);
+	return(len);
+}
+
+void	ft_put_hex(unsigned int n, const char format)
+{
+	if (n >= 16)
+	{
+		ft_put_hex(n / 16, format);
+		ft_put_hex(n % 16, format);
+	}
+	else
+	{
+		if (n <= 9)
+			ft_putchar(n + '0');
+		else
+		{
+			if (format == 'x')
+				ft_putchar(n - 10 + 'a');
+			if (format == 'X')
+				ft_putchar(n - 10 + 'A');
+		}
+	}
+}
+
+int ft_print_hex(unsigned int n, const char format)
+{
+	if (n == 0)
+		return (write(1, "0", 1));
+	else
+		ft_put_hex(n, format);
+	return(ft_hex_len(n));
 }
 
 //authorised functions:
@@ -120,9 +138,9 @@ int	ft_printf(const char *str, ...)
 			ft_putstr(va_arg(args, char*));
 			i++;
 		}
-		else if (str[i] == '%' && str[i + 1] == 'x')
+		else if (str[i] == '%' && str[i + 1] == 'x' || str[i + 1] == 'X')
 		{
-			ft_putlowerhex(va_arg(args, int));
+			ft_put_hex(va_arg(args, int));
 			i++;
 		}
 		i++;
@@ -136,7 +154,7 @@ int	main()
 	char *str = "HELLO";
 	char e = 'A';
 
-	int i = 15;
+	int i = 255;
 	int j = 3;
 //	void *p = &j;
 	char c = 'a';
@@ -147,7 +165,8 @@ int	main()
 	//printf("   Printf: n is %d, ptr is %p\n", i, p);
 	ft_printf("My function: decimal is %d, hexadecimal is %x\n", i, i);
 	printf("Printf: decimal is %d, hexadecimal is %x\n", i, i);
-
+	ft_printf("My function: decimal is %d, hexadecimal is %X\n", i, i);
+	printf("Printf: decimal is %d, hexadecimal is %X\n", i, i);
 	ft_printf("ft_printf: Number is %d, %% is the percentage\n", i);
 	printf("printf: Number is %d, %% is the percentage\n", i);
 	ft_printf("ft_printf: first number is %i, second one is %i\n", i, j);
