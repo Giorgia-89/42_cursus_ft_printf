@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_pointer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 15:24:20 by giorgia           #+#    #+#             */
+/*   Updated: 2022/11/23 16:10:48 by giorgia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libftprintf.h"
+
 int	ft_pointer(unsigned long ptr)
 {
 	char	str[50];
@@ -20,10 +34,4 @@ int	ft_pointer(unsigned long ptr)
 		ptr = ptr / 16;
 	}
 	return (2 + ft_strlen(str));
-}
-
-
-int main()
-{
-	
 }

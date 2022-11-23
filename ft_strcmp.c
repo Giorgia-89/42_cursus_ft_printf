@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 09:52:27 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/23 18:04:35 by giorgia          ###   ########.fr       */
+/*   Created: 2022/11/23 17:50:05 by giorgia           #+#    #+#             */
+/*   Updated: 2022/11/23 18:02:54 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
+//#include <stdio.h>
 
-# include <stdarg.h>
-# include "libft/libft.h"
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	ixi;
 
-void	ft_base(unsigned int n, char *base);
-int		ft_pointer(unsigned long ptr);
-int		ft_printf(const char *str, ...);
-int		ft_strcmp(char *s1, char *s2);
-
-#endif
+	ixi = 0;
+	while ((s1[ixi] == s2[ixi]) && ((s1[ixi] != '\0') || (s2[ixi] != '\0')))
+		ixi++;
+	if (((unsigned char)s1[ixi] - (unsigned char)s2[ixi]) == 0)
+		return (1);
+	else
+		return (0);
+}
