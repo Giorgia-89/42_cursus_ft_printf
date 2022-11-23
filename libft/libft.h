@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:28:06 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/22 15:01:35 by giorgia          ###   ########.fr       */
+/*   Created: 2022/11/23 10:38:02 by giorgia           #+#    #+#             */
+/*   Updated: 2022/11/23 10:47:15 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-int	ft_putnbr(int n)
-{
-	unsigned int	nbr;
-	int				count;
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-	if (n < 0)
-	{
-		ft_putchar('-');
-		nbr = (unsigned int)(n * -1);
-	}
-	else
-		nbr = (unsigned int)n;
-	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
-	ft_putchar((char)(nbr % 10 + 48));
-	count = 0;
-	while (n != 0)
-	{
-		n = n / 10;
-		count++;
-	}
-	return(count);
-}
+int		ft_putchar(char c);
+int		ft_putnbr(int n);
+int		ft_putstr(char *s);
+char	*ft_strdup(char *s);
+int		ft_strlen(const char *str);
+
+#endif
+

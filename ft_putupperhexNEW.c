@@ -6,7 +6,7 @@
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:10:34 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/22 14:39:13 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/22 18:45:44 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	ft_putstr(char *s)
 		write(1, s++, 1);
 		i++;
 	}
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
 
 char *ft_strrev(char *str)
@@ -78,32 +83,34 @@ int	ft_putupperhex(int n)
 	while (quotient != 0)
 	{
 		remainder = (quotient % 16);
-		printf("%d: remainder is %ld\n", i, remainder);
+		//printf("%d: remainder is %ld\n", i, remainder);
 		if (remainder < 10)
 		{ 	hexa[i++] = remainder + 48;
-			printf("%d: current hexa is %s\n", i, hexa);
+			ft_putchar(*hexa);
+			//printf("%d: current hexa is %s\n", i, hexa);
 		}
 		else
 		{	hexa[i++] = remainder + 55;
-			printf("%d: current hexa is %c\n", i, *hexa);
+			ft_putchar(*hexa);
+			//printf("%d: current hexa is %c\n", i, *hexa);
 		}
 		quotient = quotient / 16;
-		printf("%d: quotient is %ld\n", i, quotient);
+		//printf("%d: quotient is %ld\n", i, quotient);
 	}
 	copy = malloc(sizeof(char) * ft_strlen(hexa));
-	copy = ft_strrev(hexa);
-	printf("reversed string is %s\n", ft_strrev(copy));
-	ft_putstr(copy);
-	return(i);
+	copy = hexa;
+	//printf("reversed string is %s\n", ft_strrev(copy));
+	//ft_putstr(copy);
+	return(ft_strlen(copy));
 }
 
 
 int main()
 {
-	int i = 1567;
+	int i = 30;
 //	int j = 1567;
 
-	printf("Printf: decimal is %d, hexadecimal is %X\n", i, i);
+//	printf("Printf: decimal is %d, hexadecimal is %X\n", i, i);
 	ft_putupperhex(i);
 	//printf("my function returns %d\n", ft_putupperhex(i));
 //	printf("Printf: decimal is %d, hexadecimal is %x\n", j, j);
