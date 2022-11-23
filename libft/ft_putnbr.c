@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:28:06 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/23 10:43:53 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/23 13:08:29 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int	ft_putnbr(int n)
 		n = n / 10;
 		count++;
 	}
-	return(count);
+	return (count);
 }

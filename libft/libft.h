@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:38:02 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/23 10:47:15 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/23 13:08:42 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,3 @@ char	*ft_strdup(char *s);
 int		ft_strlen(const char *str);
 
 #endif
-

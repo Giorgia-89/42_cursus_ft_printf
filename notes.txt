@@ -1,3 +1,2 @@
 NOTES:
--functions that were the same in libft.h (e.g., strlen) should be linked to the libft.a file.
-for now i put it in the main printf, but see what other people did
+- created subfunctions for conversions, but some still missing: ft_base and ft_pointer

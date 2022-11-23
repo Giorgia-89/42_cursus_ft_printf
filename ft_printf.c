@@ -3,31 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:57:50 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/22 15:16:31 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/23 13:07:22 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 //authorised functions:
 //malloc, free, write, 
 //va_start, va_copy, va_arg, va_end
 
-//in the printf function, check specifier then use a 
-//auxiliary function (saved at root) to convert as needed. 
+//first function checks whether the current char is one of the conversion
+//specifiers
+int	ft_check(char c)
+{
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'u' \
+		|| c == 'x' || c == 'X'|| c == '%')
+		return (1);
+	return (0);
+}
+
+//second function is to count the number of written chars, and to send the
+//current chars to the subfunctions for conversions if it satisfies
+//the ft_check (i.e., if it's one of the specifiers). 
+int	ft_convert(char conv, va_list args)
+{
+	int	count;
+
+	count = 0;
+	if (conv == 'c')
+		count += ft_putchar((char)va_arg(args, int));
+	else if (conv == 's')
+		count += ft_putstr(va_arg(args, char *));
+	else if (conv == 'p')
+		count += ft_pointer(va_arg(args, unsigned long));
+	else if (conv == 'd' || conv == 'i')
+		count += ft_putnbr(va_arg(args, int));
+	else if (conv == 'u')
+		count += ft_base(va_arg(args, unsigned int), "0123456789");
+	else if (conv == 'x')	
+		count += ft_base(va_arg(args, unsigned int), "0123456789abcdef");
+	else if (conv == 'X')	
+		count += ft_base(va_arg(args, unsigned int), "0123456789ABCDEF");
+	else if (conv == '%')
+		count =+ ft_putchar('%');
+	return (count);
+}
+
+//third function is to start writing the chars of the first arg to output
+//and count the number of written chars
+int	ft_start(const char *format, va_list args)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (format[i])
+	{
+		if (!format)
+			return (count);
+		if (format[i] == '%')
+		{
+			i++;
+			if (ft_check(format[i]))
+				count += ft_convert(format[i], args);
+			else
+				return (count);
+		}
+		else
+			count += ft_putchar(format[i]);
+		i++;
+	}
+	return (count);
+}
+
+//main printf function initialises in int to start writing the chars
+//of the first arg., launches all the auxiliary functions and returns
+//tot n of chars written 
 int	ft_printf(const char *str, ...)
 {
 	//initialise list of arguments 
@@ -38,49 +93,7 @@ int	ft_printf(const char *str, ...)
 	//start list; second par should be last known one
 	va_start(args, str);
 	//initialise counter 
-	i = 0;
-	//loop through str to find the format specifiers
-	while (i < ft_strlen(str))
-	{
-		//write char by char until we find a %
-		if (str[i] != '%')
-			write(1, &str[i], 1);
-		//use va_args to loop through the args
-		else if (str[i] == '%' && (str[i + 1] == 'd' || str[i + 1] == 'i'))
-		{
-			//and declare the type of the current arg	
-			//int x = va_arg(args, int);
-			ft_putnbr(va_arg(args, int));
-			i++;
-		}
-		else if (str[i] == '%' && str[i + 1] == '%')
-		{
-			ft_putchar('%');
-			i++;
-		}
-		else if (str[i] == '%' && str[i + 1] == 'c')
-		{
-			ft_putchar(va_arg(args, int));
-			i++;
-		}
-		else if (str[i] == '%' && str[i + 1] == 's')
-		{
-			ft_putstr(va_arg(args, char*));
-			i++;
-		}
-		/*
-		else if (str[i] == '%' && str[i + 1] == 'x')
-		{
-			ft_putlowerhex(va_arg(args, int));
-			i++;
-		}
-		else if (str[i] == '%' && str[i + 1] == 'X')
-		{
-			ft_putupperhex(va_arg(args, int));
-			i++;
-		}*/
-		i++;
-	}
+	i = ft_start(str, args);
 	va_end(args);
 	return(i);
 }
