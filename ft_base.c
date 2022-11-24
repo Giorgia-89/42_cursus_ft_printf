@@ -3,67 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   ft_base.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:59:48 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/24 13:08:02 by gd-innoc         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:59:53 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//next function transforms an unsigned int in decimal (base 10)
-int	ft_unsigned(unsigned int n)
+//next function transforms an int into an unsigned decimal (base 10)
+int	ft_unsigned(int n)
 {
-	char	str[25];
-	char	*base_ten;
-	int		i;
-	int		len;
+	long int	quotient;
+	long int	remainder;
+	int			i;
+	char		hexa[50];
+	char		*copy;
 
+	quotient = n;
 	i = 0;
-	if (n == 0)
+	while (quotient != 0)
 	{
-		ft_putchar('0');
-		return (1);
+		remainder = quotient % 10;
+		if (remainder < 10)
+			hexa[i++] = remainder + 48;
+		else
+			hexa[i++] = remainder + 55;
+		quotient = quotient / 10;
 	}
-	base_ten = "0123456789";
-	while (n != 0)
-	{
-		str[i] = base_ten[n % 10];
-		n = n / 10;
-		i++;
-	}
-	len = i;
+	copy = malloc(sizeof(char) * ft_strlen(hexa));
+	copy = hexa;
 	while (i--)
-		ft_putchar(str[i]);
-	return (len);
+		ft_putchar(copy[i]);
+	return (ft_strlen(copy));
 }
 
-//next function transforms an unsigned int in hexadecimal (base 16)
-int	ft_hexa(unsigned int n, char *base)
+//next function transforms an integer to lower letters hexadecimal (base 16)
+int	ft_lowerhex(int n)
 {
-	char	str[50];
-	char	*hexa_base;
-	int		i;
-	int		len;
+	long int	quotient;
+	long int	remainder;
+	int			i;
+	char		hexa[50];
+	char		*copy;
 
+	quotient = n;
 	i = 0;
-	hexa_base = base;
-	if (n == 0)
+	while (quotient != 0)
 	{
-		ft_putchar('0');
-		return (1);
+		remainder = quotient % 16;
+		if (remainder < 10)
+			hexa[i++] = remainder + 80;
+		else
+			hexa[i++] = remainder + 87;
+		quotient = quotient / 16;
 	}
-	while (n != 0)
-	{
-		str[i] = hexa_base[n % 16];
-		n = n / 16;
-		i++;
-	}
-	len = i;
+	copy = malloc(sizeof(char) * ft_strlen(hexa));
+	copy = hexa;
 	while (i--)
-		ft_putchar(str[i]);
-	return (len);
+		ft_putchar(copy[i]);
+	return (ft_strlen(copy));
+}
+
+//next function transforms an unsigned int in uppercase letters hexadecimal (base 16)
+int	ft_upperhex(int n)
+{
+	long int	quotient;
+	long int	remainder;
+	int			i;
+	char		hexa[50];
+	char		*copy;
+
+	quotient = n;
+	i = 0;
+	while (quotient != 0)
+	{
+		remainder = quotient % 16;
+		if (remainder < 10)
+			hexa[i++] = remainder + 48;
+		else
+			hexa[i++] = remainder + 55;
+		quotient = quotient / 16;
+	}
+	copy = malloc(sizeof(char) * ft_strlen(hexa));
+	copy = hexa;
+	while (i--)
+		ft_putchar(copy[i]);
+	return (ft_strlen(copy));
 }
 
 //main function takes the int and the base (fed from ft_printf) and checks
@@ -78,13 +105,13 @@ int	ft_base(unsigned int n, char *base)
 	}
 	else if (ft_strcmp(base, "0123456789abcdef") == 1)
 	{
-		ft_hexa(n, base);
-		return (ft_hexa(n, base));
+		ft_lowerhex(n);
+		return (ft_lowerhex(n));
 	}
 	else if (ft_strcmp(base, "0123456789ABCDEF") == 1)
 	{
-		ft_hexa(n, base);
-		return (ft_hexa(n, base));
+		ft_upperhex(n);
+		return (ft_upperhex(n));
 	}
 	return (0);
 }
