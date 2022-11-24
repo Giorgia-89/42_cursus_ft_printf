@@ -6,7 +6,7 @@
 /*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:35:04 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/23 13:10:23 by gd-innoc         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:18:45 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ int	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
-	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
 	while (str[i])
 		i++;
 	return (i);

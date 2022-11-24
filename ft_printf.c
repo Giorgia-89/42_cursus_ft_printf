@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:57:50 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/23 18:30:32 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/24 11:56:16 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 //authorised functions:
 //malloc, free, write, 
 //va_start, va_copy, va_arg, va_end
@@ -19,8 +19,8 @@
 //specifiers
 int	ft_check(char c)
 {
-	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'u' \
-		|| c == 'x' || c == 'X'|| c == '%')
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'u'\
+		|| c == 'x' || c == 'X' || c == '%')
 		return (1);
 	return (0);
 }
@@ -34,7 +34,7 @@ int	ft_convert(char conv, va_list args)
 
 	count = 0;
 	if (conv == 'c')
-		count += ft_putchar((char)va_arg(args, int));
+		count += ft_putchar(va_arg(args, int));
 	else if (conv == 's')
 		count += ft_putstr(va_arg(args, char *));
 	else if (conv == 'p')
@@ -43,12 +43,12 @@ int	ft_convert(char conv, va_list args)
 		count += ft_putnbr(va_arg(args, int));
 	else if (conv == 'u')
 		count += ft_base(va_arg(args, unsigned int), "0123456789");
-	else if (conv == 'x')	
+	else if (conv == 'x')
 		count += ft_base(va_arg(args, unsigned int), "0123456789abcdef");
-	else if (conv == 'X')	
+	else if (conv == 'X')
 		count += ft_base(va_arg(args, unsigned int), "0123456789ABCDEF");
 	else if (conv == '%')
-		count =+ ft_putchar('%');
+		count += ft_putchar('%');
 	return (count);
 }
 
@@ -56,8 +56,8 @@ int	ft_convert(char conv, va_list args)
 //and count the number of written chars
 int	ft_start(const char *format, va_list args)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -85,15 +85,11 @@ int	ft_start(const char *format, va_list args)
 //tot n of chars written 
 int	ft_printf(const char *str, ...)
 {
-	//initialise list of arguments 
 	va_list	args;
-	//initialise counter to loop through str
-	int 	i;
-	
-	//start list; second par should be last known one
+	int		i;
+
 	va_start(args, str);
-	//initialise counter 
 	i = ft_start(str, args);
 	va_end(args);
-	return(i);
+	return (i);
 }

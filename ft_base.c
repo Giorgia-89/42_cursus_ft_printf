@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_base.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:59:48 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/24 10:51:31 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:08:02 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 //next function transforms an unsigned int in decimal (base 10)
-int		ft_unsigned(unsigned int n)
+int	ft_unsigned(unsigned int n)
 {
-	char	str[50];
+	char	str[25];
 	char	*base_ten;
 	int		i;
+	int		len;
 
 	i = 0;
 	if (n == 0)
@@ -29,19 +30,22 @@ int		ft_unsigned(unsigned int n)
 	while (n != 0)
 	{
 		str[i] = base_ten[n % 10];
-		ft_putchar(str[i]);
 		n = n / 10;
 		i++;
 	}
-	return (i);
+	len = i;
+	while (i--)
+		ft_putchar(str[i]);
+	return (len);
 }
 
 //next function transforms an unsigned int in hexadecimal (base 16)
-int	ft_hexa(unsigned int n,  char *base)
+int	ft_hexa(unsigned int n, char *base)
 {
 	char	str[50];
 	char	*hexa_base;
 	int		i;
+	int		len;
 
 	i = 0;
 	hexa_base = base;
@@ -56,7 +60,10 @@ int	ft_hexa(unsigned int n,  char *base)
 		n = n / 16;
 		i++;
 	}
-	return (i);
+	len = i;
+	while (i--)
+		ft_putchar(str[i]);
+	return (len);
 }
 
 //main function takes the int and the base (fed from ft_printf) and checks
@@ -64,21 +71,20 @@ int	ft_hexa(unsigned int n,  char *base)
 //corresponding function. 
 int	ft_base(unsigned int n, char *base)
 {
-
 	if (ft_strcmp(base, "0123456789") == 1)
-	{ 
+	{
 		ft_unsigned(n);
 		return (ft_unsigned(n));
 	}
-	else if (ft_strcmp(base, "0123456789abcdef") == 1) 
+	else if (ft_strcmp(base, "0123456789abcdef") == 1)
 	{
 		ft_hexa(n, base);
 		return (ft_hexa(n, base));
 	}
-	else if (ft_strcmp(base, "0123456789ABCDEF")) 
+	else if (ft_strcmp(base, "0123456789ABCDEF") == 1)
 	{
 		ft_hexa(n, base);
 		return (ft_hexa(n, base));
 	}
-	return(0);
+	return (0);
 }

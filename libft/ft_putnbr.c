@@ -6,7 +6,7 @@
 /*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:28:06 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/23 13:08:29 by gd-innoc         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:43:45 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,63 @@
 //work too. 
 #include "libft.h"
 
-int	ft_putnbr(int n)
+int	absolute_value(long int nbr)
 {
-	unsigned int	nbr;
-	int				count;
+	if (nbr < 0)
+		return (-nbr);
+	return (nbr);
+}
 
-	if (n < 0)
+int	ft_intlen(long int n)
+{
+	int	len;
+
+	if (n <= 0)
 	{
-		ft_putchar('-');
-		nbr = (unsigned int)(n * -1);
+		n = -n;
+		len = 1;
 	}
 	else
-		nbr = (unsigned int)n;
-	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
-	ft_putchar((char)(nbr % 10 + 48));
-	count = 0;
+		len = 0;
+	while (n > 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(long int n)
+{
+	int		len;
+	char	*ptr;
+
+	len = ft_intlen(n);
+	ptr = (char *)malloc((len + 1) * sizeof(char));
+	if (!ptr)
+		return (NULL);
+	ptr[len] = '\0';
+	if (n < 0)
+		ptr[0] = '-';
+	if (n == 0)
+		ptr[0] = '0';
 	while (n != 0)
 	{
-		n = n / 10;
-		count++;
+		ptr[len - 1] = absolute_value(n % 10) + '0';
+		n /= 10;
+		len--;
 	}
-	return (count);
+	return (ptr);
+}
+
+int	ft_putnbr(int nb)
+{
+	char	*str;
+	int		counter;
+
+	counter = 0;
+	str = ft_itoa(nb);
+	counter += ft_putstr(str);
+	free (str);
+	return (counter);
 }
