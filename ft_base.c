@@ -6,7 +6,7 @@
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:59:48 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/24 15:59:53 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/24 16:54:57 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_unsigned(int n)
 	long int	quotient;
 	long int	remainder;
 	int			i;
-	char		hexa[50];
-	char		*copy;
+	int			len;
+	char		deca[50];
 
 	quotient = n;
 	i = 0;
@@ -27,16 +27,15 @@ int	ft_unsigned(int n)
 	{
 		remainder = quotient % 10;
 		if (remainder < 10)
-			hexa[i++] = remainder + 48;
+			deca[i++] = remainder + 48;
 		else
-			hexa[i++] = remainder + 55;
+			deca[i++] = remainder + 55;
 		quotient = quotient / 10;
 	}
-	copy = malloc(sizeof(char) * ft_strlen(hexa));
-	copy = hexa;
+	len = i;
 	while (i--)
-		ft_putchar(copy[i]);
-	return (ft_strlen(copy));
+		ft_putchar(deca[i]);
+	return (len);
 }
 
 //next function transforms an integer to lower letters hexadecimal (base 16)
@@ -45,8 +44,8 @@ int	ft_lowerhex(int n)
 	long int	quotient;
 	long int	remainder;
 	int			i;
+	int			len;
 	char		hexa[50];
-	char		*copy;
 
 	quotient = n;
 	i = 0;
@@ -59,11 +58,10 @@ int	ft_lowerhex(int n)
 			hexa[i++] = remainder + 87;
 		quotient = quotient / 16;
 	}
-	copy = malloc(sizeof(char) * ft_strlen(hexa));
-	copy = hexa;
+	len = i;
 	while (i--)
-		ft_putchar(copy[i]);
-	return (ft_strlen(copy));
+		ft_putchar(hexa[i]);
+	return (len);
 }
 
 //next function transforms an unsigned int in uppercase letters hexadecimal (base 16)
@@ -72,8 +70,8 @@ int	ft_upperhex(int n)
 	long int	quotient;
 	long int	remainder;
 	int			i;
+	int			len;
 	char		hexa[50];
-	char		*copy;
 
 	quotient = n;
 	i = 0;
@@ -86,11 +84,10 @@ int	ft_upperhex(int n)
 			hexa[i++] = remainder + 55;
 		quotient = quotient / 16;
 	}
-	copy = malloc(sizeof(char) * ft_strlen(hexa));
-	copy = hexa;
+	len = i;
 	while (i--)
-		ft_putchar(copy[i]);
-	return (ft_strlen(copy));
+		ft_putchar(hexa[i]);
+	return (len);
 }
 
 //main function takes the int and the base (fed from ft_printf) and checks
@@ -98,20 +95,14 @@ int	ft_upperhex(int n)
 //corresponding function. 
 int	ft_base(unsigned int n, char *base)
 {
+	int	res;
+
+	res = 0;
 	if (ft_strcmp(base, "0123456789") == 1)
-	{
-		ft_unsigned(n);
-		return (ft_unsigned(n));
-	}
+		res = ft_unsigned(n);
 	else if (ft_strcmp(base, "0123456789abcdef") == 1)
-	{
-		ft_lowerhex(n);
-		return (ft_lowerhex(n));
-	}
+		res = ft_lowerhex(n);
 	else if (ft_strcmp(base, "0123456789ABCDEF") == 1)
-	{
-		ft_upperhex(n);
-		return (ft_upperhex(n));
-	}
-	return (0);
+		res = ft_upperhex(n);
+	return (res);
 }
