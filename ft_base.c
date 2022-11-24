@@ -6,7 +6,7 @@
 /*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:59:48 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/23 18:01:57 by giorgia          ###   ########.fr       */
+/*   Updated: 2022/11/24 10:51:31 by giorgia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,23 @@ int	ft_hexa(unsigned int n,  char *base)
 //main function takes the int and the base (fed from ft_printf) and checks
 //whether we need to transform to base 10 or 16, then sends n to the 
 //corresponding function. 
-void	ft_base(unsigned int n, char *base)
+int	ft_base(unsigned int n, char *base)
 {
 
 	if (ft_strcmp(base, "0123456789") == 1)
+	{ 
 		ft_unsigned(n);
+		return (ft_unsigned(n));
+	}
 	else if (ft_strcmp(base, "0123456789abcdef") == 1) 
+	{
 		ft_hexa(n, base);
+		return (ft_hexa(n, base));
+	}
 	else if (ft_strcmp(base, "0123456789ABCDEF")) 
+	{
 		ft_hexa(n, base);
-	return (0);
+		return (ft_hexa(n, base));
+	}
+	return(0);
 }

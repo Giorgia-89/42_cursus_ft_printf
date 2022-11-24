@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+         #
+#    By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 15:09:05 by giorgia           #+#    #+#              #
-#    Updated: 2022/11/23 13:02:33 by gd-innoc         ###   ########.fr        #
+#    Updated: 2022/11/24 10:46:33 by giorgia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRC = ft_printf  ft_pointer ft_base \
+SRC = ft_printf  ft_pointer ft_base ft_strcmp \
 libft/ft_putnbr  \
 libft/ft_putchar \
 libft/ft_putstr  \
