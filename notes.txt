@@ -1,8 +1,6 @@
 NOTES:
 - created subfunctions for conversions, but some still missing: ft_base and ft_pointer
 ALL functions creted but francinette tests failed.
--%p should not work when the second arg is int. mine returns the address, printf
-throws error "expected void * but argument is an int". errors still on tests
-4 6 7 8 9 
+-%p errors still on tests 4 6 7 8 9 
 - problems still with %u, %x and %X - none of the tests passed; use ft_test to figure out
 why my function always returns 0
