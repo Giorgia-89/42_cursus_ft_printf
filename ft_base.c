@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_base.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giorgia <giorgia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 12:59:48 by gd-innoc          #+#    #+#             */
-/*   Updated: 2022/11/24 16:54:57 by giorgia          ###   ########.fr       */
+/*   Created: 2022/11/25 12:14:31 by gd-innoc          #+#    #+#             */
+/*   Updated: 2022/11/25 13:06:41 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//next function transforms an int into an unsigned decimal (base 10)
-int	ft_unsigned(int n)
+int	ft_unsigned(unsigned int n)
 {
 	long int	quotient;
 	long int	remainder;
+	char		deca[50];
 	int			i;
 	int			len;
-	char		deca[50];
 
 	quotient = n;
 	i = 0;
+	if (n == 0)
+		return (ft_putchar('0'));
 	while (quotient != 0)
 	{
 		remainder = quotient % 10;
@@ -34,12 +35,11 @@ int	ft_unsigned(int n)
 	}
 	len = i;
 	while (i--)
-		ft_putchar(deca[i]);
+		write(1, &deca[i], 1);
 	return (len);
 }
 
-//next function transforms an integer to lower letters hexadecimal (base 16)
-int	ft_lowerhex(int n)
+int	ft_lowerhex(unsigned int n)
 {
 	long int	quotient;
 	long int	remainder;
@@ -49,23 +49,24 @@ int	ft_lowerhex(int n)
 
 	quotient = n;
 	i = 0;
+	if (n == 0)
+		return (ft_putchar('0'));
 	while (quotient != 0)
 	{
 		remainder = quotient % 16;
 		if (remainder < 10)
-			hexa[i++] = remainder + 80;
-		else
+			hexa[i++] = remainder + '0';
+		else if (remainder < 16)
 			hexa[i++] = remainder + 87;
 		quotient = quotient / 16;
 	}
 	len = i;
 	while (i--)
-		ft_putchar(hexa[i]);
+		write(1, &hexa[i], 1);
 	return (len);
 }
 
-//next function transforms an unsigned int in uppercase letters hexadecimal (base 16)
-int	ft_upperhex(int n)
+int	ft_upperhex(unsigned int n)
 {
 	long int	quotient;
 	long int	remainder;
@@ -75,6 +76,8 @@ int	ft_upperhex(int n)
 
 	quotient = n;
 	i = 0;
+	if (n == 0)
+		return (ft_putchar('0'));
 	while (quotient != 0)
 	{
 		remainder = quotient % 16;
@@ -86,7 +89,7 @@ int	ft_upperhex(int n)
 	}
 	len = i;
 	while (i--)
-		ft_putchar(hexa[i]);
+		write(1, &hexa[i], 1);
 	return (len);
 }
 

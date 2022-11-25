@@ -6,50 +6,37 @@
 /*   By: gd-innoc <gd-innoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:24:20 by giorgia           #+#    #+#             */
-/*   Updated: 2022/11/24 13:19:02 by gd-innoc         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:37:11 by gd-innoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_pointer(unsigned long ptr)
+int	ft_pointer(unsigned long n)
 {
-	char	str[50];
-	char	*hexa;
-	int		i;
+	char		str[25];
+	char		*hexo;
+	int			i;
+	int			len;
 
 	i = 0;
-	hexa = "0123456789abcdef";
-	if (ptr == 0)
+	hexo = "0123456789abcdef";
+	len = 0;
+	if (n == 0)
 	{
-		write(1, "0x0", 3);
-		return (3);
+		write(1, "(nil)", 5);
+		return (len + 5);
 	}
-	else
-		write(1, "0x", 2);
-	while (ptr != 0)
+	write(1, "0x", 2);
+	len += 2;
+	while (n != 0)
 	{
-		str[i] = hexa[ptr % 16];
-		ptr = ptr / 16;
+		str[i] = hexo[n % 16];
+		n /= 16;
 		i++;
 	}
+	len += i;
 	while (i--)
-		ft_putchar(str[i]);
-	return (2 + ft_strlen(str));
+		write(1, &str[i], 1);
+	return (len);
 }
-
-/*
-int main ()
-{
-	void *ptr;
-	int i;
-	//char *res;
-
-	i = 12;
-	ptr = &i;
-	printf("%p\n", i);
-	//ft_pointer(ptr);
-	//res = ft_pointer(ptr);
-	//return (res);_
-
-}*/
